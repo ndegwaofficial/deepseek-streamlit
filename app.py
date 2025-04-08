@@ -64,7 +64,8 @@ def main():
 
         with st.chat_message("assistant"):
             with st.spinner("Thinking..."):
-                response = deepseek_chat(api_key, st.session_state.messages)
+                response = deepseek_chat(st.session_state.messages)
+                
                 if response:
                     st.write(response)
                     st.session_state.messages.append(
