@@ -10,21 +10,20 @@ if "messages" not in st.session_state:
 api_key = st.secrets["api_key"]
 
 
-def deepseek_chat(api_key: str, messages: list) -> str:
+def deepseek_chat(messages: list) -> str:
     try:
-        client = OpenAI(api_key=api_key, base_url="https://api.deepseek.com")
-        response = client.chat.completions.create(
-            model="deepseek-chat",
-            messages=[
-                {"role": "system", "content": "You are a helpful assistant"},
-                *messages
-            ],
-            stream=False
+        response = requests.post(
+            "http://67.207.86.233:11434/api/chat",
+            json={
+                "model": "deepseek-r1",  # or whatever model you're running
+                "messages": messages
+            }
         )
-        return response.choices[0].message.content
+        data = response.json()
+        return data['message']['content']
     except Exception as e:
         st.error(f"Error occurred: {str(e)}")
-        return ""
+        return ""   return ""
 
 
 def main():
