@@ -23,7 +23,7 @@ def deepseek_chat(messages: list) -> str:
         return data['message']['content']
     except Exception as e:
         st.error(f"Error occurred: {str(e)}")
-        return ""   return ""
+        return ""
 
 
 def main():
