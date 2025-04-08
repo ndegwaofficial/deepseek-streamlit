@@ -1,5 +1,6 @@
 import streamlit as st
 from openai import OpenAI
+import requests
 
 # session state for chat history
 if "messages" not in st.session_state:
